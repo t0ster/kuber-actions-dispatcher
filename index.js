@@ -9,7 +9,7 @@ async function run() {
       "POST /repos/t0ster/kuber/actions/workflows/main.yml/dispatches",
       {
         ref: "master",
-        inputs: { source: context },
+        inputs: { source: JSON.stringify(context) },
       }
     );
     console.log(response);

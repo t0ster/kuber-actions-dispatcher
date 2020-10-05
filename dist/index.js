@@ -22,7 +22,7 @@ async function run() {
       "POST /repos/t0ster/kuber/actions/workflows/main.yml/dispatches",
       {
         ref: "master",
-        inputs: { source: _actions_github__WEBPACK_IMPORTED_MODULE_1__.context },
+        inputs: { source: JSON.stringify(_actions_github__WEBPACK_IMPORTED_MODULE_1__.context) },
       }
     );
     console.log(response);
