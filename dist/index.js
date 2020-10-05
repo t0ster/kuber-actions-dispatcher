@@ -14,11 +14,24 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-try {
+async function run() {
   const token = (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)("access-token");
-  // Get the JSON webhook payload for the event that triggered the workflow
-  const payload = JSON.stringify(_actions_github__WEBPACK_IMPORTED_MODULE_1__.context, undefined, 2);
-  console.log(`The event payload: ${payload}`);
+  const octokit = github.getOctokit(token);
+  const response = await octokit.request(
+    "POST /repos/t0ster/kuber/actions/workflows/main.yml/dispatches",
+    {
+      ref: "master",
+      inputs: { source: JSON.stringify(_actions_github__WEBPACK_IMPORTED_MODULE_1__.context) },
+    }
+  );
+  console.log(response);
+
+  // const payload = JSON.stringify(context, undefined, 2);
+  // console.log(`The event payload: ${payload}`);
+}
+
+try {
+  run();
 } catch (error) {
   (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed)(error.message);
 }

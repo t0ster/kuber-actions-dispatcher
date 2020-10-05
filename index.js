@@ -1,11 +1,24 @@
 import { getInput, setFailed } from "@actions/core";
 import { context, getOctokit } from "@actions/github";
 
-try {
+async function run() {
   const token = getInput("access-token");
-  // Get the JSON webhook payload for the event that triggered the workflow
-  const payload = JSON.stringify(context, undefined, 2);
-  console.log(`The event payload: ${payload}`);
+  const octokit = github.getOctokit(token);
+  const response = await octokit.request(
+    "POST /repos/t0ster/kuber/actions/workflows/main.yml/dispatches",
+    {
+      ref: "master",
+      inputs: { source: JSON.stringify(context) },
+    }
+  );
+  console.log(response);
+
+  // const payload = JSON.stringify(context, undefined, 2);
+  // console.log(`The event payload: ${payload}`);
+}
+
+try {
+  run();
 } catch (error) {
   setFailed(error.message);
 }
