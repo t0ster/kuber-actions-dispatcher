@@ -15,26 +15,26 @@ __webpack_require__.r(__webpack_exports__);
 
 
 async function run() {
-  const token = (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)("access-token");
-  const octokit = github.getOctokit(token);
-  const response = await octokit.request(
-    "POST /repos/t0ster/kuber/actions/workflows/main.yml/dispatches",
-    {
-      ref: "master",
-      inputs: { source: JSON.stringify(_actions_github__WEBPACK_IMPORTED_MODULE_1__.context) },
-    }
-  );
-  console.log(response);
+  try {
+    const token = (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)("access-token");
+    const octokit = (0,_actions_github__WEBPACK_IMPORTED_MODULE_1__.getOctokit)(token);
+    const response = await octokit.request(
+      "POST /repos/t0ster/kuber/actions/workflows/main.yml/dispatches",
+      {
+        ref: "master",
+        inputs: { source: JSON.stringify(_actions_github__WEBPACK_IMPORTED_MODULE_1__.context) },
+      }
+    );
+    console.log(response);
 
-  // const payload = JSON.stringify(context, undefined, 2);
-  // console.log(`The event payload: ${payload}`);
+    // const payload = JSON.stringify(context, undefined, 2);
+    // console.log(`The event payload: ${payload}`);
+  } catch (error) {
+    (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed)(error.message);
+  }
 }
 
-try {
-  run();
-} catch (error) {
-  (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed)(error.message);
-}
+run();
 
 
 /***/ }),
