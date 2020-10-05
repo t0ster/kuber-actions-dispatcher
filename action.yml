@@ -1,0 +1,9 @@
+name: "Dispatcher"
+description: "Dispatcher Action"
+inputs:
+  access-token:
+    description: "Github access token"
+    required: true
+runs:
+  using: "node12"
+  main: "index.js"

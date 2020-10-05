@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "module": "commonjs",
+    "allowSyntheticDefaultImports": true,
+    "noEmit": true,
+    "allowJs": true,
+    "checkJs": true,
+    "baseUrl": ".",
+    "lib": ["dom", "es2017"],
+    "exclude": ["node_modules"]
+  }
+}
